@@ -1,118 +1,100 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
-import type {PropsWithChildren} from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
   Text,
-  useColorScheme,
   View,
+  TextInput,
+  StyleSheet,
+  Pressable,
+  Keyboard,
+  Button,
+  ScrollView
 } from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+import {useState, useEffect} from 'react'
+import Card from './components/Card'
+import dreamService from './services/dream'
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+    const [usrInp,setUsrInp] = useState('')
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+    //mocking served data
+    const [otherDreams,setOtherDreams] = useState([''])
 
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+    useEffect(()=>{
+        const fetchDb = async () => {
+            let dreams = await dreamService.getAll()
+            dreams = dreams.map(dream => dream.content).reverse()
+            setOtherDreams(dreams)
+        }
+        fetchDb()
+    },[])
+
+    const btnOnPress = async () => {
+        if (usrInp == '') return
+        const newDreamObj = {
+            content: usrInp
+        }
+        await dreamService.post(newDreamObj)
+        const refreshedDreams = await dreamService.getAll()
+        const refreshedDreamsContent = refreshedDreams.map(dream=>dream.content).reverse()
+        setOtherDreams(refreshedDreamsContent)
+        setUsrInp('')
+    }
+
+    return (
+        <ScrollView style={styles.root}>                
+            <Pressable //for closing the keyboard
+                android_disableSound={true} //pressable invoke android's default sounds
+                onPress={()=>Keyboard.dismiss()}>
+                <View style={{flexDirection:'row'}}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Last night I dreamed about...'
+                        placeholderTextColor='#E5E5E5'
+                        onChangeText={setUsrInp}
+                        value={usrInp}
+                    />
+                    <Button style={styles.button} 
+                            onPress={btnOnPress} title='post'/>
+                </View>
+                <View style={styles.someoneContainer}>
+                    <Text style={styles.someoneText}>Someone has dreamed about</Text>
+                </View>
+                {otherDreams.map((dream,index)=>
+                    <Card key={index} content={dream}/>
+                )}
+            </Pressable>
+        </ScrollView>
+    );
 }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+    root: {
+        flex:1,
+        backgroundColor:'#14213D'
+    }, 
+    button: {
+        color:'#FCA311'
+    },
+    input: {
+        color:'#E5E5E5',
+        borderColor:'#E5E5E5',
+        flex:1,
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+    },
+    someoneContainer:{
+        marginTop:30,
+        marginBottom:30
+    },
+    someoneText: {
+        color:'#ffffff',
+        textAlign:'center',
+        fontFamily: 'Roboto',
+        fontSize:30
+    }
+})
+
 
 export default App;
