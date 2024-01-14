@@ -53,7 +53,7 @@ function App(): React.JSX.Element {
                         onChangeText={setUsrInp}
                         value={usrInp}
                     />
-                    <Button style={styles.button} 
+                    <Button color='#FCA311'
                             onPress={btnOnPress} title='post'/>
                 </View>
                 <View style={styles.someoneContainer}>
