@@ -8,6 +8,11 @@ _*whisper your dreams*_
 - Dreams tell us some the most fascinating stories, relizations, and guidances.
 - __*People forget 90% of their dreams within 10 minutes of waking up*__
 
+## 🚀 Quick Start
+- Download the [android apk](https://github.com/sokennguyen/Lucid/releases/tag/arm64-v8a)
+- Install Lucid by clicking on the apk and process through the installation
+- Start posting your dreams!
+
 Lucid helps you save and share your wildest dreams to others, anonymously.
 
 
