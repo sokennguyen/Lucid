@@ -2,18 +2,43 @@
 _*whisper your dreams*_
 
 ## Motivation
+
 - Everyone dreams every time they sleep, whether they remember it or not
 - Dreams can be fascinating, exciting, terrifying, or bizarre
 - Dreams are your brain’s way of collecting and clearing out useless information from the day
 - Dreams tell us some the most fascinating stories, relizations, and guidances.
 - __*People forget 90% of their dreams within 10 minutes of waking up*__
 
+Lucid helps you save and share your wildest dreams to others, anonymously.
+
 ## 🚀 Quick Start
-- Download the [android apk](https://github.com/sokennguyen/Lucid/releases/tag/arm64-v8a)
-- Install Lucid by clicking on the apk and process through the installation
+
+- Download the latest [android release](https://github.com/sokennguyen/Lucid/releases/tag/arm64-v8a)
+- Install Lucid by clicking on the downloaded apk and process through the installation
 - Start posting your dreams!
 
-Lucid helps you save and share your wildest dreams to others, anonymously.
+## 🤝 Contributing
+
+### Prerequisites
+
+Developing environment with React Native for Android
+
+### Clone the repo
+
+```bash
+git clone [github.com/sokennguyen/Lucid](https://github.com/sokennguyen/Lucid)
+```
+
+### Run the android build
+
+```bash
+cd Lucid
+npm run android
+```
+
+### Submit a pull request
+
+If you'd like to contribute, please fork the repository and open a pull request to the `main` branch.
 
 
 Get the latest Android release in Release!
