@@ -32,7 +32,7 @@ git clone [github.com/sokennguyen/Lucid](https://github.com/sokennguyen/Lucid)
 ### Run the android build
 
 ```bash
-cd Lucid
+cd lucid
 npm run android
 ```
 
