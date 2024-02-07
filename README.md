@@ -1,4 +1,4 @@
-![Lucid logo](https://raw.githubusercontent.com/sokennguyen/Lucid/main/playstore-icon.png)
+![Lucid logo](https://raw.githubusercontent.com/sokennguyen/Lucid/main/playstore-icon.png)\
 Share your dreams
 
 ## Motivation
