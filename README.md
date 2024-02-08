@@ -26,7 +26,7 @@ Developing environment with React Native for Android
 ### Clone the repo
 
 ```bash
-git clone [github.com/sokennguyen/Lucid](https://github.com/sokennguyen/Lucid)
+git clone https://github.com/sokennguyen/Lucid
 ```
 
 ### Run the android build
