@@ -32,7 +32,8 @@ git clone https://github.com/sokennguyen/lucid
 ### Run the android build
 
 ```bash
-cd lucid
+cd lucid/android
+./gradlew clean
 npm run android
 ```
 
